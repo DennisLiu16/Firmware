@@ -168,7 +168,6 @@ RGBLED::print_status()
 		/* we don't care about power-save mode */
 		PX4_INFO("state: %s", on ? "ON" : "OFF");
 		PX4_INFO("red: %u, green: %u, blue: %u", (unsigned)r, (unsigned)g, (unsigned)b);
-
 	} else {
 		PX4_WARN("failed to read led");
 	}
@@ -178,6 +177,7 @@ void
 RGBLED::RunImpl()
 {
 	// check for parameter updates
+	printf("check runimpl\n");
 	if (_parameter_update_sub.updated()) {
 		// clear update
 		parameter_update_s pupdate;
@@ -243,6 +243,7 @@ RGBLED::RunImpl()
 
 	/* re-queue ourselves to run again later */
 	ScheduleDelayed(_led_controller.maximum_update_interval());
+
 }
 
 /**

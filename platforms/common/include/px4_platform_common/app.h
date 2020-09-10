@@ -51,7 +51,7 @@ public:
 	AppState() : _exitRequested(false), _isRunning(false) {}
 
 	bool exitRequested() { return _exitRequested; }
-	void requestExit() { _exitRequested = true; }
+	void requestExit() { _exitRequested = true;}
 
 	bool isRunning() { return _isRunning; }
 	void setRunning(bool running) { _isRunning = running; }

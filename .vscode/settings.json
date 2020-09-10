@@ -27,9 +27,10 @@
         "cSpell.showStatus": false,
         "cSpell.words": [
                 "acro",
-                "rattitude",
+                "esc",
                 "nuttx",
-                "esc"
+                "rattitude",
+                "termios"
         ],
         "debug.toolBarLocation": "docked",
         "editor.acceptSuggestionOnEnter": "off",

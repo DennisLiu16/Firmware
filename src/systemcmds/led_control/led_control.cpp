@@ -48,7 +48,7 @@
 #include <uORB/Publication.hpp>
 #include <uORB/topics/led_control.h>
 
-static void	usage();
+static void usage();
 
 extern "C" {
 	__EXPORT int led_control_main(int argc, char *argv[]);

@@ -97,6 +97,11 @@ px4_add_board(
 		#temperature_compensation
 		vmount
 		#vtol_att_control
+
+#########      my module         #########
+		px4_simple_app   #hello & uORB
+		rw_uart          #serial test -
+
 	SYSTEMCMDS
 		bl_update
 		#dmesg
