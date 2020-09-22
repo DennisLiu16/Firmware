@@ -98,7 +98,7 @@ px4_add_board(
 		vmount
 		#vtol_att_control
 
-#########      my module         #########
+#########       my module         #########
 		px4_simple_app   #hello & uORB
 		rw_uart          #serial test -
 
@@ -109,7 +109,7 @@ px4_add_board(
 		#esc_calib
 		hardfault_log
 		#i2cdetect
-		#led_control
+		led_control
 		mixer
 		#motor_ramp
 		#motor_test
