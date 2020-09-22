@@ -6,11 +6,10 @@
 #include <drivers/drv_hrt.h>
 #include <string.h>
 #include <systemlib/err.h>
-//#include <systemlib/systemlib.h>
+//#include <systemlib/systemlib.h> - canceled by publisher - 9.22 - Dennis
 #include <fcntl.h>
 #include <sys/types.h>
 #include <sys/stat.h>
-
 __EXPORT int rw_uart_main(int argc, char *argv[]);
 
 int set_uart_baudrate(const int fd, unsigned int baud);
