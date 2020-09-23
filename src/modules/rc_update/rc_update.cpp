@@ -99,7 +99,6 @@ RCUpdate::init()
 		PX4_ERR("input_rc callback registration failed!");
 		return false;
 	}
-
 	return true;
 }
 
@@ -379,7 +378,6 @@ RCUpdate::Run()
 		}
 
 		unsigned channel_limit = rc_input.channel_count;
-
 		if (channel_limit > RC_MAX_CHAN_COUNT) {
 			channel_limit = RC_MAX_CHAN_COUNT;
 		}
@@ -391,7 +389,6 @@ RCUpdate::Run()
 			 * 1) Constrain to min/max values, as later processing depends on bounds.
 			 */
 			rc_input.values[i] = math::constrain(rc_input.values[i], _parameters.min[i], _parameters.max[i]);
-
 			/*
 			 * 2) Scale around the mid point differently for lower and upper range.
 			 *
@@ -549,7 +546,9 @@ RCUpdate::Run()
 			}
 		}
 	}
-
+	else{
+		printf("copy rc_input failed\n");
+	}
 	perf_end(_loop_perf);
 }
 
@@ -557,12 +556,13 @@ int
 RCUpdate::task_spawn(int argc, char *argv[])
 {
 	RCUpdate *instance = new RCUpdate();
-
 	if (instance) {
 		_object.store(instance);
 		_task_id = task_id_is_work_queue;
 
 		if (instance->init()) {
+			//tmp get in Run()
+			instance -> Run();
 			return PX4_OK;
 		}
 
