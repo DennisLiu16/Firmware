@@ -15,9 +15,25 @@
 #include <uORB/uORB.h>
 #include <uORB/topics/input_rc.h>
 
+/*
+	1. New Thread : 不打擾別的指令
+	2. stop 有效
+
+
+
+*/
+
+
+
+
+
+//var
+volatile bool Exit = 0;
+//function
 void monitor(int);
 void copy_input_ppm(int);
 
+//export
 __EXPORT int read_input_ppm_main(int argc, char *argv[]);
 
 
@@ -38,11 +54,18 @@ int read_input_ppm_main(int argc, char *argv[]){
 		PX4_INFO("Try to read ppm\n");
 
 		monitor(input_rc_sub_fd);
+
+		Exit = 0;
+		PX4_INFO("Leaving\n");
+		exit(0);
 	}
 
 	if (!strcmp(argv[1], "stop")) {
 
-		PX4_INFO("Leaving\n");
+		Exit = true;
+
+		/*unsubscribe*/
+
 		exit(0);
 	}
 
@@ -56,11 +79,13 @@ out:
 
 void
 monitor(int rc_sub_fd){
+
 	/*clean first*/
 	printf("\033[2J");
 	printf("read values are:\n");
+
 	/*show result*/
-	for(;;){
+	while(!Exit){
 		printf("\033[2J\033[H");
 		printf("\n");
 
@@ -82,7 +107,6 @@ copy_input_ppm(int rc_sub_fd){
 
 	for(int i = 0;i < 1;i++){
 		printf(" %u",input_rc.values[i]);
-		//PX4_INFO(" %u",input_rc.values[i]);
 	}
 
 }

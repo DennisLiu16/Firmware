@@ -567,8 +567,6 @@ else
 		reboot
 	fi
 
-	#my auto start
-	read_input_ppm monitor
 #
 # End of autostart.
 #
