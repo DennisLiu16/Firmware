@@ -222,7 +222,6 @@ controls_tick()
 	 * one control input source, they're going to fight each
 	 * other.  Don't do that.
 	 */
-	printf("fuck you\n");
 #ifdef ADC_RSSI
 
 	if (r_setup_features & PX4IO_P_SETUP_FEATURES_ADC_RSSI) {
