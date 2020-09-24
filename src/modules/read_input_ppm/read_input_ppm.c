@@ -58,12 +58,11 @@ void
 monitor(int rc_sub_fd){
 	/*clean first*/
 	printf("\033[2J");
-
+	printf("read values are:\n");
 	/*show result*/
 	for(;;){
 		printf("\033[2J\033[H");
-		printf("read values are:\n");
-
+		printf("\n");
 
 		copy_input_ppm(rc_sub_fd);
 
@@ -82,7 +81,8 @@ copy_input_ppm(int rc_sub_fd){
 	orb_copy(ORB_ID(input_rc),rc_sub_fd,&input_rc);
 
 	for(int i = 0;i < 1;i++){
-		PX4_INFO(" %u",input_rc.values[i]);
+		printf(" %u",input_rc.values[i]);
+		//PX4_INFO(" %u",input_rc.values[i]);
 	}
 
 }
