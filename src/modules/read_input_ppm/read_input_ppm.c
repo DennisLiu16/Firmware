@@ -15,33 +15,74 @@
 #include <uORB/uORB.h>
 #include <uORB/topics/input_rc.h>
 
+void monitor(int);
+void copy_input_ppm(int);
 
 __EXPORT int read_input_ppm_main(int argc, char *argv[]);
 
+
+
 int read_input_ppm_main(int argc, char *argv[]){
 
-	PX4_INFO("Try to read ppm\n");
+	if(argc < 2){
+		goto out;
+	}
 
 	/* subscribe to input_rc topic */
 	int input_rc_sub_fd = orb_subscribe(ORB_ID(input_rc));
 	/* limit the update rate to 10 Hz */
 	orb_set_interval(input_rc_sub_fd,100);
 
-	struct input_rc_s input_rc;
-	/* copy the data */
-	orb_copy(ORB_ID(input_rc),input_rc_sub_fd,&input_rc);
+	if (!strcmp(argv[1], "monitor")) {
 
+		PX4_INFO("Try to read ppm\n");
 
-	/*show result*/
-	for(int i = 0;i < 18;i++){
-		PX4_INFO(" %u",input_rc.values[i]);
+		monitor(input_rc_sub_fd);
 	}
 
-	printf("\n");
+	if (!strcmp(argv[1], "stop")) {
 
-	PX4_INFO("read ppm end\n");
+		PX4_INFO("Leaving\n");
+		exit(0);
+	}
 
+out:
+	PX4_ERR("command wrong , please use monitor / stop only");
 	return 0;
 
+}
+
+
+
+void
+monitor(int rc_sub_fd){
+	/*clean first*/
+	printf("\033[2J");
+
+	/*show result*/
+	for(;;){
+		printf("\033[2J\033[H");
+		printf("read values are:\n");
+
+
+		copy_input_ppm(rc_sub_fd);
+
+		//可以改成一個sleep 一個poll_up試試
+
+		usleep(200);
+	}
+
+}
+
+void
+copy_input_ppm(int rc_sub_fd){
+
+	struct input_rc_s input_rc;
+	/* copy the data */
+	orb_copy(ORB_ID(input_rc),rc_sub_fd,&input_rc);
+
+	for(int i = 0;i < 1;i++){
+		PX4_INFO(" %u",input_rc.values[i]);
+	}
 
 }
