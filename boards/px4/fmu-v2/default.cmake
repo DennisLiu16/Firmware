@@ -17,6 +17,7 @@ px4_add_board(
 		TEL1:/dev/ttyS1
 		TEL2:/dev/ttyS2
 		TEL4:/dev/ttyS6
+		#TEL4 : Serial 4
 	DRIVERS
 		adc/board_adc
 		#barometer # all available barometer drivers
@@ -102,7 +103,7 @@ px4_add_board(
 #########       my module         #########
 		px4_simple_app   #hello & uORB
 		rw_uart          #serial test
-		read_input_ppm
+		read_input_ppm   #read ppm
 
 	SYSTEMCMDS
 		bl_update

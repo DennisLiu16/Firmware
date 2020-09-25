@@ -6,6 +6,8 @@
 #include <px4_platform_common/px4_config.h>
 #include <px4_platform_common/tasks.h>
 #include <px4_platform_common/posix.h>
+#include <px4_platform_common/module.h>
+
 #include <unistd.h>
 #include <stdio.h>
 #include <poll.h>
@@ -45,10 +47,20 @@ __EXPORT int read_input_ppm_main(int argc, char *argv[]);
 int read_input_ppm_main(int argc, char *argv[]){
 
 	if(argc < 2){
-		goto out;
+		PX4_ERR("please check number of var\n");
 	}
 
+	if(!strcmp(argv[1],"status")){
 
+		printf("\n\n");
+		printf("Cmd include\n");
+		printf("start : init all\n");
+		printf("monitor : check ppm\n");
+		printf("status : printf cmd line\n");
+		printf("stop : stop this process\n");
+		printf("\n\n");
+
+	}
 	if(!strcmp(argv[1],"start")){
 
 		start(argc-1,argv+1);
@@ -71,8 +83,6 @@ int read_input_ppm_main(int argc, char *argv[]){
 		stop();
 	}
 
-out:
-	PX4_ERR("command wrong , please use start , monitor , stop only");
 	return 0;
 
 }
