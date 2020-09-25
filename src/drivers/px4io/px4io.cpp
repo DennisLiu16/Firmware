@@ -472,6 +472,7 @@ PX4IO::PX4IO(device::Device *interface) :
 
 PX4IO::~PX4IO()
 {
+	//called when stop
 	/* tell the task we want it to go away */
 	_task_should_exit = true;
 

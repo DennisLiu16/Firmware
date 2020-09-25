@@ -64,7 +64,7 @@ px4_add_board(
 		#tap_esc
 		#telemetry # all available telemetry drivers
 		#rc_input
-		test_ppm
+		#test_ppm
 		tone_alarm
 		#uavcan
 	MODULES
@@ -101,7 +101,7 @@ px4_add_board(
 
 #########       my module         #########
 		px4_simple_app   #hello & uORB
-		rw_uart          #serial test 
+		rw_uart          #serial test
 		read_input_ppm
 
 	SYSTEMCMDS
